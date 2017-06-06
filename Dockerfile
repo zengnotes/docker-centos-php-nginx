@@ -16,6 +16,7 @@ ADD baselayout.tar /
 # Init bootstrap
 RUN set -x \
     # System update
+    && yum makecache fast \
     && /usr/local/bin/yum-upgrade \
     && /usr/local/bin/yum-install \
         epel-release \
@@ -155,6 +156,7 @@ RUN /usr/local/bin/yum-install \
     && /opt/docker/bin/bootstrap.sh \
     && docker-image-cleanup
 
+RUN yum clean all
 
 ENTRYPOINT ["/entrypoint"]
 
